@@ -18,29 +18,110 @@ namespace SBBStationFinder
             InitializeComponent();
         }
 
-        private ITransport testee
+        private ITransport iStation;
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            testee = new Transport();
-            var stations = testee.GetStations("Sursee,");
+            dateAndTimeGUIControl();
+        }
 
-            while (!(stations.StationList.))
+        private void cbStart_TextChanged(object sender, EventArgs e) // AutoComplete
+        {
+            if(timerCombo.Enabled)
+            {
+                return;
+            }
+
+            ComboBox cbSender;
+            if(sender is ComboBox)
+            {
+                cbSender = (ComboBox)sender;
+            }
+            else
+            {
+                return;
+            }
+
+            string inputText = cbSender.Text;
+            if(cbSender.Text.Length >= 3 && !(cbSender.Items.Contains(cbSender.Text)))
+            {
+                timerCombo.Start();
+                Stations validStations = getValidSations(cbSender);
+                cbSender.Items.Clear();
+                if(validStations != null)
+                {
+                    foreach(Station _s in validStations.StationList)
+                    {
+                        cbSender.Items.Add(_s.Name);
+                    }
+                }
+                cbSender.DroppedDown = true;
+                cbSender.Text = inputText;
+                cbSender.SelectionStart = cbSender.Text.Length;
+            }
+        }
+
+        private Stations getValidSations(ComboBox _c)
+        {
+            iStation = new Transport();
+            Stations stations = iStation.GetStations(_c.Text);
+
+            if(!(stations.StationList.Count > 0))
+            {
+                return null;
+            }
+
+            for(int i = stations.StationList.Count-1; i >= 0; i--)
+            {
+                if(stations.StationList[i].Id == null || stations.StationList[i].Name == null)
+                {
+                    stations.StationList.RemoveAt(i);
+                }
+            }
+            return stations;
+        }
+
+        private void timerCombo_Tick(object sender, EventArgs e) //Timer für AutoComplete
+        {
+            timerCombo.Stop();
+            cbStart_TextChanged(ActiveControl, null);
+        }
+
+        private void dateAndTimeGUIControl()
+        {
+            if(cbStart.Text == "")
+            {
+                rbTimeStart.Enabled = false;
+            }
+            else
+            {
+                rbTimeStart.Enabled = true;
+            }
+
+            if(cbZiel.Text == "")
+            {
+                rbTimeEnd.Enabled = false;
+            }
+            else
+            {
+                rbTimeEnd.Enabled = true;
+            }
+            
+            if(rbTimeStart.Enabled == true || rbTimeEnd.Enabled == true)
+            {
+                dtpArrivalDate.Enabled = true;
+                dtpArrivalTime.Enabled = true;
+            }
+            else
+            {
+                dtpArrivalDate.Enabled = false;
+                dtpArrivalTime.Enabled = false;
+            }
         }
     }
 }

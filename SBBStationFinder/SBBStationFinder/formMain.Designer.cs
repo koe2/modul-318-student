@@ -28,37 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.edtStationStart = new System.Windows.Forms.TextBox();
-            this.edtStationZiel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dtpArrivalTime = new System.Windows.Forms.DateTimePicker();
-            this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
+            this.pnlZeit = new System.Windows.Forms.Panel();
             this.gbTime = new System.Windows.Forms.GroupBox();
             this.rbTimeEnd = new System.Windows.Forms.RadioButton();
             this.rbTimeStart = new System.Windows.Forms.RadioButton();
             this.rbTimeOFF = new System.Windows.Forms.RadioButton();
+            this.dtpArrivalTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pageControl1 = new System.Windows.Forms.TabControl();
+            this.tabVerbindung = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tabStart = new System.Windows.Forms.TabPage();
+            this.cbStart = new System.Windows.Forms.ComboBox();
+            this.cbZiel = new System.Windows.Forms.ComboBox();
+            this.timerCombo = new System.Windows.Forms.Timer(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlZeit.SuspendLayout();
             this.gbTime.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.pageControl1.SuspendLayout();
+            this.tabVerbindung.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(713, 504);
+            this.btnClose.Location = new System.Drawing.Point(673, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
@@ -72,7 +75,7 @@
             this.hilfeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(760, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,7 +92,6 @@
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             this.infoToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.infoToolStripMenuItem.Text = "Info";
-            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -100,20 +102,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Start";
             // 
-            // edtStationStart
-            // 
-            this.edtStationStart.Location = new System.Drawing.Point(43, 41);
-            this.edtStationStart.Name = "edtStationStart";
-            this.edtStationStart.Size = new System.Drawing.Size(173, 20);
-            this.edtStationStart.TabIndex = 3;
-            // 
-            // edtStationZiel
-            // 
-            this.edtStationZiel.Location = new System.Drawing.Point(43, 76);
-            this.edtStationZiel.Name = "edtStationZiel";
-            this.edtStationZiel.Size = new System.Drawing.Size(173, 20);
-            this.edtStationZiel.TabIndex = 5;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -123,35 +111,16 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Ziel";
             // 
-            // panel1
+            // pnlZeit
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.gbTime);
-            this.panel1.Controls.Add(this.dtpArrivalTime);
-            this.panel1.Controls.Add(this.dtpArrivalDate);
-            this.panel1.Location = new System.Drawing.Point(16, 168);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(450, 105);
-            this.panel1.TabIndex = 8;
-            // 
-            // dtpArrivalTime
-            // 
-            this.dtpArrivalTime.CustomFormat = "HH:mm";
-            this.dtpArrivalTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpArrivalTime.Location = new System.Drawing.Point(218, 9);
-            this.dtpArrivalTime.Name = "dtpArrivalTime";
-            this.dtpArrivalTime.ShowUpDown = true;
-            this.dtpArrivalTime.Size = new System.Drawing.Size(56, 20);
-            this.dtpArrivalTime.TabIndex = 9;
-            // 
-            // dtpArrivalDate
-            // 
-            this.dtpArrivalDate.CustomFormat = "dd:MM:yyyy";
-            this.dtpArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpArrivalDate.Location = new System.Drawing.Point(110, 9);
-            this.dtpArrivalDate.Name = "dtpArrivalDate";
-            this.dtpArrivalDate.Size = new System.Drawing.Size(92, 20);
-            this.dtpArrivalDate.TabIndex = 8;
+            this.pnlZeit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlZeit.Controls.Add(this.gbTime);
+            this.pnlZeit.Controls.Add(this.dtpArrivalTime);
+            this.pnlZeit.Controls.Add(this.dtpArrivalDate);
+            this.pnlZeit.Location = new System.Drawing.Point(232, 27);
+            this.pnlZeit.Name = "pnlZeit";
+            this.pnlZeit.Size = new System.Drawing.Size(210, 83);
+            this.pnlZeit.TabIndex = 8;
             // 
             // gbTime
             // 
@@ -160,7 +129,7 @@
             this.gbTime.Controls.Add(this.rbTimeOFF);
             this.gbTime.Location = new System.Drawing.Point(3, 3);
             this.gbTime.Name = "gbTime";
-            this.gbTime.Size = new System.Drawing.Size(101, 94);
+            this.gbTime.Size = new System.Drawing.Size(197, 45);
             this.gbTime.TabIndex = 10;
             this.gbTime.TabStop = false;
             this.gbTime.Text = "Datum / Zeit";
@@ -168,22 +137,20 @@
             // rbTimeEnd
             // 
             this.rbTimeEnd.AutoSize = true;
-            this.rbTimeEnd.Location = new System.Drawing.Point(6, 66);
+            this.rbTimeEnd.Location = new System.Drawing.Point(133, 20);
             this.rbTimeEnd.Name = "rbTimeEnd";
             this.rbTimeEnd.Size = new System.Drawing.Size(62, 17);
             this.rbTimeEnd.TabIndex = 2;
-            this.rbTimeEnd.TabStop = true;
             this.rbTimeEnd.Text = "Ankunft";
             this.rbTimeEnd.UseVisualStyleBackColor = true;
             // 
             // rbTimeStart
             // 
             this.rbTimeStart.AutoSize = true;
-            this.rbTimeStart.Location = new System.Drawing.Point(7, 43);
+            this.rbTimeStart.Location = new System.Drawing.Point(68, 20);
             this.rbTimeStart.Name = "rbTimeStart";
             this.rbTimeStart.Size = new System.Drawing.Size(59, 17);
             this.rbTimeStart.TabIndex = 1;
-            this.rbTimeStart.TabStop = true;
             this.rbTimeStart.Text = "Abfahrt";
             this.rbTimeStart.UseVisualStyleBackColor = true;
             // 
@@ -199,10 +166,29 @@
             this.rbTimeOFF.Text = "Aus";
             this.rbTimeOFF.UseVisualStyleBackColor = true;
             // 
+            // dtpArrivalTime
+            // 
+            this.dtpArrivalTime.CustomFormat = "HH:mm";
+            this.dtpArrivalTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpArrivalTime.Location = new System.Drawing.Point(114, 54);
+            this.dtpArrivalTime.Name = "dtpArrivalTime";
+            this.dtpArrivalTime.ShowUpDown = true;
+            this.dtpArrivalTime.Size = new System.Drawing.Size(56, 20);
+            this.dtpArrivalTime.TabIndex = 9;
+            // 
+            // dtpArrivalDate
+            // 
+            this.dtpArrivalDate.CustomFormat = "dd:MM:yyyy";
+            this.dtpArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpArrivalDate.Location = new System.Drawing.Point(10, 54);
+            this.dtpArrivalDate.Name = "dtpArrivalDate";
+            this.dtpArrivalDate.Size = new System.Drawing.Size(92, 20);
+            this.dtpArrivalDate.TabIndex = 8;
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(16, 504);
+            this.button1.Location = new System.Drawing.Point(23, 449);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 9;
@@ -210,56 +196,94 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // tabControl1
+            // pageControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(19, 279);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(769, 219);
-            this.tabControl1.TabIndex = 10;
+            this.pageControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pageControl1.Controls.Add(this.tabVerbindung);
+            this.pageControl1.Controls.Add(this.tabStart);
+            this.pageControl1.Controls.Add(this.tabPage1);
+            this.pageControl1.Location = new System.Drawing.Point(16, 116);
+            this.pageControl1.Name = "pageControl1";
+            this.pageControl1.SelectedIndex = 0;
+            this.pageControl1.Size = new System.Drawing.Size(738, 322);
+            this.pageControl1.TabIndex = 10;
             // 
-            // tabPage1
+            // tabVerbindung
             // 
-            this.tabPage1.Controls.Add(this.listBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(761, 193);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabVerbindung.Controls.Add(this.listBox1);
+            this.tabVerbindung.Location = new System.Drawing.Point(4, 22);
+            this.tabVerbindung.Name = "tabVerbindung";
+            this.tabVerbindung.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVerbindung.Size = new System.Drawing.Size(730, 296);
+            this.tabVerbindung.TabIndex = 0;
+            this.tabVerbindung.Text = "Verbindung";
+            this.tabVerbindung.UseVisualStyleBackColor = true;
             // 
             // listBox1
             // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(6, 6);
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(739, 173);
+            this.listBox1.Size = new System.Drawing.Size(724, 290);
             this.listBox1.TabIndex = 0;
+            // 
+            // tabStart
+            // 
+            this.tabStart.Location = new System.Drawing.Point(4, 22);
+            this.tabStart.Name = "tabStart";
+            this.tabStart.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStart.Size = new System.Drawing.Size(764, 356);
+            this.tabStart.TabIndex = 1;
+            this.tabStart.Text = "Verbindung Start";
+            this.tabStart.UseVisualStyleBackColor = true;
+            // 
+            // cbStart
+            // 
+            this.cbStart.FormattingEnabled = true;
+            this.cbStart.Location = new System.Drawing.Point(43, 42);
+            this.cbStart.Name = "cbStart";
+            this.cbStart.Size = new System.Drawing.Size(173, 21);
+            this.cbStart.TabIndex = 11;
+            this.cbStart.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
+            // 
+            // cbZiel
+            // 
+            this.cbZiel.FormattingEnabled = true;
+            this.cbZiel.Location = new System.Drawing.Point(43, 76);
+            this.cbZiel.Name = "cbZiel";
+            this.cbZiel.Size = new System.Drawing.Size(173, 21);
+            this.cbZiel.TabIndex = 12;
+            this.cbZiel.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
+            // 
+            // timerCombo
+            // 
+            this.timerCombo.Interval = 1000;
+            this.timerCombo.Tick += new System.EventHandler(this.timerCombo_Tick);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(764, 356);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Verbindung Ziel";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 539);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(760, 484);
+            this.Controls.Add(this.cbZiel);
+            this.Controls.Add(this.cbStart);
+            this.Controls.Add(this.pageControl1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.edtStationZiel);
+            this.Controls.Add(this.pnlZeit);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.edtStationStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.menuStrip1);
@@ -268,11 +292,11 @@
             this.Text = "SBB Station Finder";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.pnlZeit.ResumeLayout(false);
             this.gbTime.ResumeLayout(false);
             this.gbTime.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.pageControl1.ResumeLayout(false);
+            this.tabVerbindung.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,10 +309,8 @@
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox edtStationStart;
-        private System.Windows.Forms.TextBox edtStationZiel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlZeit;
         private System.Windows.Forms.DateTimePicker dtpArrivalTime;
         private System.Windows.Forms.DateTimePicker dtpArrivalDate;
         private System.Windows.Forms.GroupBox gbTime;
@@ -296,10 +318,14 @@
         private System.Windows.Forms.RadioButton rbTimeStart;
         private System.Windows.Forms.RadioButton rbTimeOFF;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl pageControl1;
+        private System.Windows.Forms.TabPage tabVerbindung;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabStart;
+        private System.Windows.Forms.ComboBox cbStart;
+        private System.Windows.Forms.ComboBox cbZiel;
+        private System.Windows.Forms.Timer timerCombo;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
 
