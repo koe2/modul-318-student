@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransport", "src\Swiss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportTest", "tests\SwissTransportTest\SwissTransportTest.csproj", "{959C6E54-5B1C-40F5-938A-C57B17451421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBB Station Finder", "SBB Station Finder\SBB Station Finder.csproj", "{320F7F86-EE69-4658-9CBE-B7F0EFC660AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBBStationFinder", "SBBStationFinder\SBBStationFinder\SBBStationFinder.csproj", "{79E11941-A42D-4DFC-9E20-9085C551223F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{959C6E54-5B1C-40F5-938A-C57B17451421}.Release|Any CPU.Build.0 = Release|Any CPU
-		{320F7F86-EE69-4658-9CBE-B7F0EFC660AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{320F7F86-EE69-4658-9CBE-B7F0EFC660AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{320F7F86-EE69-4658-9CBE-B7F0EFC660AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{320F7F86-EE69-4658-9CBE-B7F0EFC660AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E11941-A42D-4DFC-9E20-9085C551223F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E11941-A42D-4DFC-9E20-9085C551223F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E11941-A42D-4DFC-9E20-9085C551223F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E11941-A42D-4DFC-9E20-9085C551223F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

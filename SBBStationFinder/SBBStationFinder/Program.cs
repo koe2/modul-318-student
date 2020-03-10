@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SBB_Station_Finder
+namespace SBBStationFinder
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace SBB_Station_Finder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new formMain());
         }
     }
 }

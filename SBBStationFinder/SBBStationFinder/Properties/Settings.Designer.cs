@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SBB_Station_Finder.Properties
+namespace SBBStationFinder.Properties
 {
 
 
