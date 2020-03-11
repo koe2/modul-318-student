@@ -45,17 +45,23 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pageControl1 = new System.Windows.Forms.TabControl();
             this.tabVerbindung = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbVerbindungStart = new System.Windows.Forms.ListBox();
             this.tabStart = new System.Windows.Forms.TabPage();
+            this.tabZiel = new System.Windows.Forms.TabPage();
             this.cbStart = new System.Windows.Forms.ComboBox();
             this.cbZiel = new System.Windows.Forms.ComboBox();
             this.timerCombo = new System.Windows.Forms.Timer(this.components);
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lbBoardStart = new System.Windows.Forms.ListBox();
+            this.lbBoardZiel = new System.Windows.Forms.ListBox();
+            this.formMainBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.pnlZeit.SuspendLayout();
             this.gbTime.SuspendLayout();
             this.pageControl1.SuspendLayout();
             this.tabVerbindung.SuspendLayout();
+            this.tabStart.SuspendLayout();
+            this.tabZiel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.formMainBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -203,7 +209,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pageControl1.Controls.Add(this.tabVerbindung);
             this.pageControl1.Controls.Add(this.tabStart);
-            this.pageControl1.Controls.Add(this.tabPage1);
+            this.pageControl1.Controls.Add(this.tabZiel);
             this.pageControl1.Location = new System.Drawing.Point(16, 116);
             this.pageControl1.Name = "pageControl1";
             this.pageControl1.SelectedIndex = 0;
@@ -212,7 +218,7 @@
             // 
             // tabVerbindung
             // 
-            this.tabVerbindung.Controls.Add(this.listBox1);
+            this.tabVerbindung.Controls.Add(this.lbVerbindungStart);
             this.tabVerbindung.Location = new System.Drawing.Point(4, 22);
             this.tabVerbindung.Name = "tabVerbindung";
             this.tabVerbindung.Padding = new System.Windows.Forms.Padding(3);
@@ -221,24 +227,36 @@
             this.tabVerbindung.Text = "Verbindung";
             this.tabVerbindung.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // lbVerbindungStart
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(724, 290);
-            this.listBox1.TabIndex = 0;
+            this.lbVerbindungStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbVerbindungStart.FormattingEnabled = true;
+            this.lbVerbindungStart.Location = new System.Drawing.Point(3, 3);
+            this.lbVerbindungStart.Name = "lbVerbindungStart";
+            this.lbVerbindungStart.Size = new System.Drawing.Size(724, 290);
+            this.lbVerbindungStart.TabIndex = 0;
             // 
             // tabStart
             // 
+            this.tabStart.Controls.Add(this.lbBoardStart);
             this.tabStart.Location = new System.Drawing.Point(4, 22);
             this.tabStart.Name = "tabStart";
             this.tabStart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStart.Size = new System.Drawing.Size(764, 356);
+            this.tabStart.Size = new System.Drawing.Size(730, 296);
             this.tabStart.TabIndex = 1;
-            this.tabStart.Text = "Verbindung Start";
+            this.tabStart.Text = "Abfahrtstafel Start";
             this.tabStart.UseVisualStyleBackColor = true;
+            // 
+            // tabZiel
+            // 
+            this.tabZiel.Controls.Add(this.lbBoardZiel);
+            this.tabZiel.Location = new System.Drawing.Point(4, 22);
+            this.tabZiel.Name = "tabZiel";
+            this.tabZiel.Padding = new System.Windows.Forms.Padding(3);
+            this.tabZiel.Size = new System.Drawing.Size(730, 296);
+            this.tabZiel.TabIndex = 2;
+            this.tabZiel.Text = "Abfahrtstafel Ziel";
+            this.tabZiel.UseVisualStyleBackColor = true;
             // 
             // cbStart
             // 
@@ -263,15 +281,27 @@
             this.timerCombo.Interval = 1000;
             this.timerCombo.Tick += new System.EventHandler(this.timerCombo_Tick);
             // 
-            // tabPage1
+            // lbBoardStart
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(764, 356);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Verbindung Ziel";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.lbBoardStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbBoardStart.FormattingEnabled = true;
+            this.lbBoardStart.Location = new System.Drawing.Point(3, 3);
+            this.lbBoardStart.Name = "lbBoardStart";
+            this.lbBoardStart.Size = new System.Drawing.Size(724, 290);
+            this.lbBoardStart.TabIndex = 1;
+            // 
+            // lbBoardZiel
+            // 
+            this.lbBoardZiel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbBoardZiel.FormattingEnabled = true;
+            this.lbBoardZiel.Location = new System.Drawing.Point(3, 3);
+            this.lbBoardZiel.Name = "lbBoardZiel";
+            this.lbBoardZiel.Size = new System.Drawing.Size(724, 290);
+            this.lbBoardZiel.TabIndex = 1;
+            // 
+            // formMainBindingSource
+            // 
+            this.formMainBindingSource.DataSource = typeof(SBBStationFinder.formMain);
             // 
             // formMain
             // 
@@ -290,6 +320,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "formMain";
             this.Text = "SBB Station Finder";
+            this.Activated += new System.EventHandler(this.formMain_Activated);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlZeit.ResumeLayout(false);
@@ -297,6 +328,9 @@
             this.gbTime.PerformLayout();
             this.pageControl1.ResumeLayout(false);
             this.tabVerbindung.ResumeLayout(false);
+            this.tabStart.ResumeLayout(false);
+            this.tabZiel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.formMainBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,12 +354,15 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl pageControl1;
         private System.Windows.Forms.TabPage tabVerbindung;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbVerbindungStart;
         private System.Windows.Forms.TabPage tabStart;
         private System.Windows.Forms.ComboBox cbStart;
         private System.Windows.Forms.ComboBox cbZiel;
         private System.Windows.Forms.Timer timerCombo;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabZiel;
+        private System.Windows.Forms.BindingSource formMainBindingSource;
+        private System.Windows.Forms.ListBox lbBoardStart;
+        private System.Windows.Forms.ListBox lbBoardZiel;
     }
 }
 
