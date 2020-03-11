@@ -33,5 +33,14 @@ namespace SwissTransport
 
             Assert.IsNotNull(connections);
         }
+
+        [TestMethod]
+        public void ConnectionsByDateTime()
+        {
+            testee = new Transport();
+            var connections = testee.GetConnectionByDateTime("Sursee", "Luzern", "2020-03-12", "", 1);
+
+            Assert.IsNotNull(connections);
+        }
     }
 }

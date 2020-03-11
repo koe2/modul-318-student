@@ -16,7 +16,14 @@ namespace SBBStationFinder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formMain());
+            try
+            {
+                Application.Run(new formMain());
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
