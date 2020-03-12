@@ -306,9 +306,7 @@ namespace SBBStationFinder
             {
                 System.Diagnostics.Process.Start(target);
             }
-            catch
-                (
-                 System.ComponentModel.Win32Exception noBrowser)
+            catch(System.ComponentModel.Win32Exception noBrowser)
             {
                 if(noBrowser.ErrorCode == -2147467259)
                     MessageBox.Show("Kein Webbrowser vorhanden. Abbruch!");
