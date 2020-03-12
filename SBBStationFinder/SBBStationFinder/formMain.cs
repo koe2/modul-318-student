@@ -21,6 +21,8 @@ namespace SBBStationFinder
 
         private ITransport iStation;
         private Stations validStations;
+        private StationBoardRoot sbStart;
+        private StationBoardRoot sbZiel;
         private string textChanged;
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace SBBStationFinder
                 }
                 catch(Exception)
                 {
-                    canConnectAPI();
+                    CheckNetworkConnection.start();
                 }
             }
 ;        }
@@ -173,7 +175,7 @@ namespace SBBStationFinder
             }
         }
 
-        private void getStationBoard(ComboBox _cbSender, ListBox _lb, TabPage _tb)
+        private StationBoardRoot getStationBoard(ComboBox _cbSender, ListBox _lb, TabPage _tb)
         {
             _lb.Items.Clear();
             if(_cbSender.Text != "" && _cbSender.SelectedIndex > 0)
@@ -191,10 +193,13 @@ namespace SBBStationFinder
                                   );
                 }
                 _tb.Text = "Ab: " + _cbSender.Text;
+
+                return sb;
             }
             else
             {
                 _tb.Text = "Ab: ";
+                return null;
             }
         }
 
@@ -207,53 +212,6 @@ namespace SBBStationFinder
             return tmpDate;
         }
 
-        private bool canConnectAPI()
-        {
-            short errorLevel = 0;
-            try
-            {
-                Ping myPing = new Ping();
-                String host = "transport.opendata.ch";
-                byte[] buffer = new byte[32];
-                int timeout = 1000;
-                PingOptions pingOptions = new PingOptions();
-                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                return (reply.Status == IPStatus.Success);
-            }
-            catch(Exception)
-            {
-                errorLevel = 1;
-
-                try
-                {
-                    Ping myPing = new Ping();
-                    String host = "google.com";
-                    byte[] buffer = new byte[32];
-                    int timeout = 1000;
-                    PingOptions pingOptions = new PingOptions();
-                    PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                    return (reply.Status == IPStatus.Success);
-                }
-                catch(Exception)
-                {
-                    errorLevel = 2;
-                }
-            }
-
-            if(errorLevel == 1)
-            {
-                MessageBox.Show("transport.opendata.ch ist nicht erreichbar!");
-                return false;
-            }
-            else if(errorLevel == 2)
-            {
-                MessageBox.Show("google.com ist nicht erreichbar! Verbindung zum Internet überprüfen!");
-                return false;
-            }
-
-            return true;
-        }
-
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmInfo f = new frmInfo();
@@ -262,15 +220,16 @@ namespace SBBStationFinder
 
         private void formMain_Load(object sender, EventArgs e)
         {
-            canConnectAPI();
+            CheckNetworkConnection.start();
         }
 
         private void btnSuche_Click(object sender, EventArgs e)
         {
             try
             {
-                getStationBoard(cbStart, lbBoardStart, tabStart);
-                getStationBoard(cbZiel, lbBoardZiel, tabZiel);
+                
+                sbStart = getStationBoard(cbStart, lbBoardStart, tabStart);
+                sbZiel = getStationBoard(cbZiel, lbBoardZiel, tabZiel);
                 if(rbTimeOFF.Checked)
                 {
                     getStationConnection(cbStart.Text, cbZiel.Text);
@@ -286,10 +245,64 @@ namespace SBBStationFinder
                         getDateTimeConnection(cbStart.Text, cbZiel.Text, dtpArrivalDate.Text, dtpArrivalTime.Text, 1);
                     }
                 }
+                pageControl.Focus();
             }
             catch(Exception)
             {
-                canConnectAPI();
+                CheckNetworkConnection.start();
+            }
+        }
+
+        private void alsMailVersendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMail f = new frmMail(lbVerbindungStart,lbBoardStart,lbBoardZiel);
+            f.ShowDialog(this);
+        }
+
+        private void openBrowser(string _x, string _y)
+        {
+            string target = "https://www.google.com/maps/search/?api=1&query="+ _x+","+_y;
+
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch
+                (
+                 System.ComponentModel.Win32Exception noBrowser)
+            {
+                if(noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show("Kein Webbrowser vorhanden. Abbruch!");
+            }
+            catch(System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        private void btnMapStart_Click(object sender, EventArgs e)
+        {
+            if(lbBoardStart.SelectedIndex >= 0)
+            {
+                if(sbStart != null)
+                {
+                    double x = sbStart.Station.Coordinate.XCoordinate;
+                    double y = sbStart.Station.Coordinate.YCoordinate;
+                    openBrowser(x.ToString(),y.ToString());
+                }
+            }
+        }
+
+        private void btnMapZiel_Click(object sender, EventArgs e)
+        {
+            if(lbBoardZiel.SelectedIndex >= 0)
+            {
+                if(sbZiel != null)
+                {
+                    double x = sbZiel.Station.Coordinate.XCoordinate;
+                    double y = sbZiel.Station.Coordinate.YCoordinate;
+                    openBrowser(x.ToString(), y.ToString());
+                }
             }
         }
     }

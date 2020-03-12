@@ -30,6 +30,8 @@
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alsMailVersendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,22 +44,28 @@
             this.dtpArrivalTime = new System.Windows.Forms.DateTimePicker();
             this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.btnSuche = new System.Windows.Forms.Button();
-            this.pageControl1 = new System.Windows.Forms.TabControl();
+            this.pageControl = new System.Windows.Forms.TabControl();
             this.tabVerbindung = new System.Windows.Forms.TabPage();
             this.lbVerbindungStart = new System.Windows.Forms.ListBox();
             this.tabStart = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMapStart = new System.Windows.Forms.Button();
             this.lbBoardStart = new System.Windows.Forms.ListBox();
             this.tabZiel = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMapZiel = new System.Windows.Forms.Button();
             this.lbBoardZiel = new System.Windows.Forms.ListBox();
             this.cbStart = new System.Windows.Forms.ComboBox();
             this.cbZiel = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.pnlZeit.SuspendLayout();
             this.gbTime.SuspendLayout();
-            this.pageControl1.SuspendLayout();
+            this.pageControl.SuspendLayout();
             this.tabVerbindung.SuspendLayout();
             this.tabStart.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabZiel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -66,7 +74,7 @@
             this.btnClose.Location = new System.Drawing.Point(673, 449);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 0;
+            this.btnClose.TabIndex = 12;
             this.btnClose.Text = "Schliessen";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -74,12 +82,28 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.extrasToolStripMenuItem,
             this.hilfeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(760, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // extrasToolStripMenuItem
+            // 
+            this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alsMailVersendenToolStripMenuItem});
+            this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.extrasToolStripMenuItem.Text = "Extras";
+            // 
+            // alsMailVersendenToolStripMenuItem
+            // 
+            this.alsMailVersendenToolStripMenuItem.Name = "alsMailVersendenToolStripMenuItem";
+            this.alsMailVersendenToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.alsMailVersendenToolStripMenuItem.Text = "als Mail Versenden";
+            this.alsMailVersendenToolStripMenuItem.Click += new System.EventHandler(this.alsMailVersendenToolStripMenuItem_Click);
             // 
             // hilfeToolStripMenuItem
             // 
@@ -123,7 +147,7 @@
             this.pnlZeit.Location = new System.Drawing.Point(232, 27);
             this.pnlZeit.Name = "pnlZeit";
             this.pnlZeit.Size = new System.Drawing.Size(210, 83);
-            this.pnlZeit.TabIndex = 8;
+            this.pnlZeit.TabIndex = 3;
             // 
             // gbTime
             // 
@@ -133,7 +157,7 @@
             this.gbTime.Location = new System.Drawing.Point(3, 3);
             this.gbTime.Name = "gbTime";
             this.gbTime.Size = new System.Drawing.Size(197, 45);
-            this.gbTime.TabIndex = 10;
+            this.gbTime.TabIndex = 4;
             this.gbTime.TabStop = false;
             this.gbTime.Text = "Datum / Zeit";
             // 
@@ -143,7 +167,7 @@
             this.rbTimeEnd.Location = new System.Drawing.Point(133, 20);
             this.rbTimeEnd.Name = "rbTimeEnd";
             this.rbTimeEnd.Size = new System.Drawing.Size(62, 17);
-            this.rbTimeEnd.TabIndex = 2;
+            this.rbTimeEnd.TabIndex = 7;
             this.rbTimeEnd.Text = "Ankunft";
             this.rbTimeEnd.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +177,7 @@
             this.rbTimeStart.Location = new System.Drawing.Point(68, 20);
             this.rbTimeStart.Name = "rbTimeStart";
             this.rbTimeStart.Size = new System.Drawing.Size(59, 17);
-            this.rbTimeStart.TabIndex = 1;
+            this.rbTimeStart.TabIndex = 6;
             this.rbTimeStart.Text = "Abfahrt";
             this.rbTimeStart.UseVisualStyleBackColor = true;
             // 
@@ -164,7 +188,7 @@
             this.rbTimeOFF.Location = new System.Drawing.Point(7, 20);
             this.rbTimeOFF.Name = "rbTimeOFF";
             this.rbTimeOFF.Size = new System.Drawing.Size(43, 17);
-            this.rbTimeOFF.TabIndex = 0;
+            this.rbTimeOFF.TabIndex = 5;
             this.rbTimeOFF.TabStop = true;
             this.rbTimeOFF.Text = "Aus";
             this.rbTimeOFF.UseVisualStyleBackColor = true;
@@ -194,24 +218,24 @@
             this.btnSuche.Location = new System.Drawing.Point(23, 449);
             this.btnSuche.Name = "btnSuche";
             this.btnSuche.Size = new System.Drawing.Size(75, 23);
-            this.btnSuche.TabIndex = 9;
+            this.btnSuche.TabIndex = 10;
             this.btnSuche.Text = "Suchen";
             this.btnSuche.UseVisualStyleBackColor = true;
             this.btnSuche.Click += new System.EventHandler(this.btnSuche_Click);
             // 
-            // pageControl1
+            // pageControl
             // 
-            this.pageControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pageControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pageControl1.Controls.Add(this.tabVerbindung);
-            this.pageControl1.Controls.Add(this.tabStart);
-            this.pageControl1.Controls.Add(this.tabZiel);
-            this.pageControl1.Location = new System.Drawing.Point(16, 116);
-            this.pageControl1.Name = "pageControl1";
-            this.pageControl1.SelectedIndex = 0;
-            this.pageControl1.Size = new System.Drawing.Size(738, 322);
-            this.pageControl1.TabIndex = 10;
+            this.pageControl.Controls.Add(this.tabVerbindung);
+            this.pageControl.Controls.Add(this.tabStart);
+            this.pageControl.Controls.Add(this.tabZiel);
+            this.pageControl.Location = new System.Drawing.Point(16, 116);
+            this.pageControl.Name = "pageControl";
+            this.pageControl.SelectedIndex = 0;
+            this.pageControl.Size = new System.Drawing.Size(738, 322);
+            this.pageControl.TabIndex = 11;
             // 
             // tabVerbindung
             // 
@@ -235,6 +259,7 @@
             // 
             // tabStart
             // 
+            this.tabStart.Controls.Add(this.panel2);
             this.tabStart.Controls.Add(this.lbBoardStart);
             this.tabStart.Location = new System.Drawing.Point(4, 22);
             this.tabStart.Name = "tabStart";
@@ -244,17 +269,40 @@
             this.tabStart.Text = "Abfahrtstafel Start";
             this.tabStart.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnMapStart);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(3, 263);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(724, 30);
+            this.panel2.TabIndex = 3;
+            // 
+            // btnMapStart
+            // 
+            this.btnMapStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnMapStart.Location = new System.Drawing.Point(3, 4);
+            this.btnMapStart.Name = "btnMapStart";
+            this.btnMapStart.Size = new System.Drawing.Size(75, 23);
+            this.btnMapStart.TabIndex = 11;
+            this.btnMapStart.Text = "Map";
+            this.btnMapStart.UseVisualStyleBackColor = true;
+            this.btnMapStart.Click += new System.EventHandler(this.btnMapStart_Click);
+            // 
             // lbBoardStart
             // 
-            this.lbBoardStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbBoardStart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbBoardStart.FormattingEnabled = true;
             this.lbBoardStart.Location = new System.Drawing.Point(3, 3);
             this.lbBoardStart.Name = "lbBoardStart";
-            this.lbBoardStart.Size = new System.Drawing.Size(724, 290);
+            this.lbBoardStart.Size = new System.Drawing.Size(724, 251);
             this.lbBoardStart.TabIndex = 1;
             // 
             // tabZiel
             // 
+            this.tabZiel.Controls.Add(this.panel1);
             this.tabZiel.Controls.Add(this.lbBoardZiel);
             this.tabZiel.Location = new System.Drawing.Point(4, 22);
             this.tabZiel.Name = "tabZiel";
@@ -264,13 +312,35 @@
             this.tabZiel.Text = "Abfahrtstafel Ziel";
             this.tabZiel.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnMapZiel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 263);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(724, 30);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnMapZiel
+            // 
+            this.btnMapZiel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnMapZiel.Location = new System.Drawing.Point(3, 4);
+            this.btnMapZiel.Name = "btnMapZiel";
+            this.btnMapZiel.Size = new System.Drawing.Size(75, 23);
+            this.btnMapZiel.TabIndex = 11;
+            this.btnMapZiel.Text = "Map";
+            this.btnMapZiel.UseVisualStyleBackColor = true;
+            this.btnMapZiel.Click += new System.EventHandler(this.btnMapZiel_Click);
+            // 
             // lbBoardZiel
             // 
-            this.lbBoardZiel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbBoardZiel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbBoardZiel.FormattingEnabled = true;
             this.lbBoardZiel.Location = new System.Drawing.Point(3, 3);
             this.lbBoardZiel.Name = "lbBoardZiel";
-            this.lbBoardZiel.Size = new System.Drawing.Size(724, 290);
+            this.lbBoardZiel.Size = new System.Drawing.Size(724, 251);
             this.lbBoardZiel.TabIndex = 1;
             // 
             // cbStart
@@ -279,7 +349,7 @@
             this.cbStart.Location = new System.Drawing.Point(43, 42);
             this.cbStart.Name = "cbStart";
             this.cbStart.Size = new System.Drawing.Size(173, 21);
-            this.cbStart.TabIndex = 11;
+            this.cbStart.TabIndex = 1;
             this.cbStart.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
             // 
             // cbZiel
@@ -288,17 +358,18 @@
             this.cbZiel.Location = new System.Drawing.Point(43, 76);
             this.cbZiel.Name = "cbZiel";
             this.cbZiel.Size = new System.Drawing.Size(173, 21);
-            this.cbZiel.TabIndex = 12;
+            this.cbZiel.TabIndex = 2;
             this.cbZiel.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
             // 
             // formMain
             // 
+            this.AcceptButton = this.btnSuche;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 484);
             this.Controls.Add(this.cbZiel);
             this.Controls.Add(this.cbStart);
-            this.Controls.Add(this.pageControl1);
+            this.Controls.Add(this.pageControl);
             this.Controls.Add(this.btnSuche);
             this.Controls.Add(this.pnlZeit);
             this.Controls.Add(this.label2);
@@ -315,10 +386,12 @@
             this.pnlZeit.ResumeLayout(false);
             this.gbTime.ResumeLayout(false);
             this.gbTime.PerformLayout();
-            this.pageControl1.ResumeLayout(false);
+            this.pageControl.ResumeLayout(false);
             this.tabVerbindung.ResumeLayout(false);
             this.tabStart.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tabZiel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,7 +413,7 @@
         private System.Windows.Forms.RadioButton rbTimeStart;
         private System.Windows.Forms.RadioButton rbTimeOFF;
         private System.Windows.Forms.Button btnSuche;
-        private System.Windows.Forms.TabControl pageControl1;
+        private System.Windows.Forms.TabControl pageControl;
         private System.Windows.Forms.TabPage tabVerbindung;
         private System.Windows.Forms.ListBox lbVerbindungStart;
         private System.Windows.Forms.TabPage tabStart;
@@ -349,6 +422,12 @@
         private System.Windows.Forms.TabPage tabZiel;
         private System.Windows.Forms.ListBox lbBoardStart;
         private System.Windows.Forms.ListBox lbBoardZiel;
+        private System.Windows.Forms.ToolStripMenuItem extrasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alsMailVersendenToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnMapStart;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnMapZiel;
     }
 }
 
