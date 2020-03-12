@@ -23,7 +23,6 @@ namespace SBBStationFinder
         private Stations validStations;
         private StationBoardRoot sbStart;
         private StationBoardRoot sbZiel;
-        private string textChanged;
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -32,51 +31,69 @@ namespace SBBStationFinder
 
         private void cbStart_TextChanged(object sender, EventArgs e)
         {
-           
-            ComboBox cbSender;
-            if(sender is ComboBox)
+            if(timerAutocomplete.Enabled)
             {
-                cbSender = (ComboBox)sender;
+                timerAutocomplete.Stop();
+                timerAutocomplete.Start();
+                return;
+            }
+            else
+            {
+                autoComplete();
+            }
+;       }
+
+        private void autoComplete()
+        {
+            ComboBox activeControl;
+            if(this.ActiveControl is ComboBox)
+            {
+                activeControl = (ComboBox)this.ActiveControl;
             }
             else
             {
                 return;
             }
 
-            if(textChanged != cbSender.Text)
+            string inputText = activeControl.Text;
+            if(activeControl.Text.Length >= 3 && !(activeControl.Items.Contains(activeControl.Text)))
             {
+                timerAutocomplete.Enabled = true;
+                timerAutocomplete.Start();
                 try
                 {
-                    autoComplete(cbSender);
-                    textChanged = cbSender.Text;
+                    validStations = getValidSations(activeControl.Text);
+                    activeControl.Items.Clear();
+                    if(validStations != null)
+                    {
+                        foreach(Station s in validStations.StationList)
+                        {
+                            activeControl.Items.Add(s.Name);
+                        }
+                    }
+                    activeControl.DroppedDown = true;
+                    activeControl.Text = inputText;
+                    activeControl.SelectionStart = activeControl.Text.Length;
                 }
                 catch(Exception)
                 {
+                    timerAutocomplete.Stop();
+                    timerAutocomplete.Enabled = false;
                     CheckNetworkConnection.start();
                 }
             }
-;        }
-
-        private void autoComplete(ComboBox _sender)
-        {
-            string inputText = _sender.Text;
-            if(_sender.Text.Length >= 3 && !(_sender.Items.Contains(_sender.Text)))
-            {
-                validStations = getValidSations(_sender.Text);
-                _sender.Items.Clear();
-                if(validStations != null)
-                {
-                    foreach(Station s in validStations.StationList)
-                    {
-                        _sender.Items.Add(s.Name);
-                    }
-                }
-                _sender.DroppedDown = true;
-                _sender.Text = inputText;
-                _sender.SelectionStart = _sender.Text.Length;
-            }
             dateAndTimeGUIControl();
         }
+
+        private void timerAutocomplete_Tick(object sender, EventArgs e)
+        {
+            timerAutocomplete.Stop();
+            timerAutocomplete.Enabled = false;
+            autoComplete();
+        }
+
+
+
 
         private Stations getValidSations(string _s)
         {
@@ -126,6 +143,7 @@ namespace SBBStationFinder
 
         private void getDateTimeConnection(string _start, string _end, string _date, string _time, short _isArrival)
         {
+            lbVerbindungStart.Items.Clear();
             if(_start == "" || _end == "" || _date == "")
             {
                 return;
@@ -134,7 +152,6 @@ namespace SBBStationFinder
             iStation = new Transport();
             Connections transportConnection = iStation.GetConnectionByDateTime(_start, _end, convertToAPIDate(_date), _time, _isArrival);
 
-            lbVerbindungStart.Items.Clear();
             foreach(Connection c in transportConnection.ConnectionList)
             {
                 lbVerbindungStart.Items.Add("Start: " + c.From.Station.Name +
@@ -151,6 +168,7 @@ namespace SBBStationFinder
 
         private void getStationConnection(string _start, string _end)
         {
+            lbVerbindungStart.Items.Clear();
             if(_start == "" || _end == "")
             {
                 return;
@@ -158,9 +176,7 @@ namespace SBBStationFinder
 
             iStation = new Transport();
             Connections transportConnection = iStation.GetConnections(_start, _end);
-
-
-            lbVerbindungStart.Items.Clear();
+       
             foreach(Connection c in transportConnection.ConnectionList)
             {
                 lbVerbindungStart.Items.Add("Start: " + c.From.Station.Name +
@@ -178,7 +194,7 @@ namespace SBBStationFinder
         private StationBoardRoot getStationBoard(ComboBox _cbSender, ListBox _lb, TabPage _tb)
         {
             _lb.Items.Clear();
-            if(_cbSender.Text != "" && _cbSender.SelectedIndex > 0)
+            if(_cbSender.Text != "" && _cbSender.SelectedIndex > -1)
             {
                 iStation = new Transport();
                 string id = validStations.StationList[_cbSender.SelectedIndex].Id.ToString();
@@ -225,6 +241,12 @@ namespace SBBStationFinder
 
         private void btnSuche_Click(object sender, EventArgs e)
         {
+            if(btnSuche.Enabled == false)
+            {
+                return;
+            }
+
+            btnSuche.Enabled = false;
             try
             {
                 
@@ -245,12 +267,29 @@ namespace SBBStationFinder
                         getDateTimeConnection(cbStart.Text, cbZiel.Text, dtpArrivalDate.Text, dtpArrivalTime.Text, 1);
                     }
                 }
-                pageControl.Focus();
+
+                if(lbBoardStart.Items.Count > 0 && lbVerbindungStart.Items.Count == 0 && lbBoardZiel.Items.Count == 0)
+                {
+                    pageControl.SelectedTab = tabStart;
+                    pageControl.Focus();
+                }
+                else if(lbBoardStart.Items.Count == 0 && lbVerbindungStart.Items.Count == 0 && lbBoardZiel.Items.Count > 0)
+                {
+                    pageControl.SelectedTab = tabZiel;
+                    pageControl.Focus();
+                }
+                else
+                {
+                    pageControl.SelectedTab = tabVerbindung;
+                    pageControl.Focus();
+                }
+
             }
             catch(Exception)
             {
                 CheckNetworkConnection.start();
             }
+            btnSuche.Enabled = true;
         }
 
         private void alsMailVersendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -303,6 +342,22 @@ namespace SBBStationFinder
                     double y = sbZiel.Station.Coordinate.YCoordinate;
                     openBrowser(x.ToString(), y.ToString());
                 }
+            }
+        }
+
+        private void cbStart_Leave(object sender, EventArgs e)
+        {
+            if(cbStart.SelectedIndex < 0 && cbStart.Items.Count > 0 && cbStart.Text != "")
+            {
+                cbStart.SelectedIndex = 0;
+            }
+        }
+
+        private void cbZiel_Leave(object sender, EventArgs e)
+        {
+            if(cbZiel.SelectedIndex < 0 && cbZiel.Items.Count > 0 && cbZiel.Text != "")
+            {
+                cbZiel.SelectedIndex = 0;
             }
         }
     }

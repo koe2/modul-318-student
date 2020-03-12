@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +58,7 @@
             this.lbBoardZiel = new System.Windows.Forms.ListBox();
             this.cbStart = new System.Windows.Forms.ComboBox();
             this.cbZiel = new System.Windows.Forms.ComboBox();
+            this.timerAutocomplete = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.pnlZeit.SuspendLayout();
             this.gbTime.SuspendLayout();
@@ -347,19 +349,28 @@
             // 
             this.cbStart.FormattingEnabled = true;
             this.cbStart.Location = new System.Drawing.Point(43, 42);
+            this.cbStart.MaxLength = 25;
             this.cbStart.Name = "cbStart";
             this.cbStart.Size = new System.Drawing.Size(173, 21);
             this.cbStart.TabIndex = 1;
             this.cbStart.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
+            this.cbStart.Leave += new System.EventHandler(this.cbStart_Leave);
             // 
             // cbZiel
             // 
             this.cbZiel.FormattingEnabled = true;
             this.cbZiel.Location = new System.Drawing.Point(43, 76);
+            this.cbZiel.MaxLength = 25;
             this.cbZiel.Name = "cbZiel";
             this.cbZiel.Size = new System.Drawing.Size(173, 21);
             this.cbZiel.TabIndex = 2;
             this.cbZiel.TextChanged += new System.EventHandler(this.cbStart_TextChanged);
+            this.cbZiel.Leave += new System.EventHandler(this.cbZiel_Leave);
+            // 
+            // timerAutocomplete
+            // 
+            this.timerAutocomplete.Interval = 500;
+            this.timerAutocomplete.Tick += new System.EventHandler(this.timerAutocomplete_Tick);
             // 
             // formMain
             // 
@@ -428,6 +439,7 @@
         private System.Windows.Forms.Button btnMapStart;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnMapZiel;
+        private System.Windows.Forms.Timer timerAutocomplete;
     }
 }
 
