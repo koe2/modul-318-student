@@ -1,0 +1,6 @@
+Installation
+
+1) StationFinderSFX.exe ausführen
+2) Optional: Pfad anpassen
+3) auf "Extract" klicken
+4) SBBStationFinder.exe ausführen
